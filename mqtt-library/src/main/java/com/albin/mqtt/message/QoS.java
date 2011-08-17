@@ -26,10 +26,15 @@ public enum QoS {
 		this.val = val;
 	}
 	
-	static QoS valueOf(int i) {
+	public static QoS valueOf(int i) {
 		for(QoS q: QoS.values()) {
-			if (q.val == i)
+			if (q.val == i){
 				return q;
+			}else if(i > 2){
+				return EXACTLY_ONCE;
+			}else if(i < 0){
+				return AT_MOST_ONCE;
+			}
 		}
 		throw new IllegalArgumentException("Not a valid QoS number: " + i);
 	}

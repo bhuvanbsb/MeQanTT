@@ -28,14 +28,19 @@ public class PublishMessage extends RetryableMessage {
 	private String topic;
 	private byte[] data;
 
-	public PublishMessage(String topic, String msg) {
-		this(topic, FormatUtil.toMQttString(msg));
+	public PublishMessage(String topic, String msg){
+		this(topic, FormatUtil.toMQttString(msg), QoS.AT_MOST_ONCE);
 	}
 	
-	public PublishMessage(String topic, byte[] data) {
+	public PublishMessage(String topic, String msg, QoS qos) {
+		this(topic, FormatUtil.toMQttString(msg), qos);
+	}
+	
+	public PublishMessage(String topic, byte[] data, QoS qos) {
 		super(Type.PUBLISH);
 		this.topic = topic;
 		this.data = data;
+		setQos(qos);
 	}
 
 	public PublishMessage(Header header) throws IOException {

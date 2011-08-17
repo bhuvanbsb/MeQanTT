@@ -33,7 +33,7 @@ public class MqttMessageHandler extends SimpleChannelHandler {
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e)
 			throws Exception {
-		System.out.println("Caught exception: " + e.getCause());
+		System.err.println("Caught exception: " + e.getCause());
 		e.getChannel().close();
 	}
 	
@@ -56,6 +56,9 @@ public class MqttMessageHandler extends SimpleChannelHandler {
 		if (msg == null) {
 			return;
 		}
+		
+		System.err.println("Message Type: "+ msg.getType());
+		
 		switch (msg.getType()) {
 		case CONNACK:
 			handleMessage((ConnAckMessage) msg);

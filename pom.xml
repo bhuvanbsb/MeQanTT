@@ -17,6 +17,7 @@
   <modules>
     <module>mqtt-library</module>
     <module>netty-test-client</module>
+    
   </modules>
 
 </project>
